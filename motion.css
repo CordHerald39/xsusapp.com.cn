@@ -1,0 +1,249 @@
+/* Quiet, finite motion. This layer is shared by the ten static design pages. */
+.site {
+  --paper-dot: color-mix(in srgb, var(--accent) 16%, transparent);
+  --paper-line: color-mix(in srgb, var(--accent) 9%, transparent);
+  --ambient: color-mix(in srgb, var(--accent) 8%, transparent);
+  --motion-distance: 5px;
+}
+
+.site .hero-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.site .hero-wrap::before,
+.site .hero-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The reading area stays open; the texture gathers around the illustration. */
+.site .hero-wrap::before {
+  background-image: radial-gradient(circle, var(--paper-dot) .8px, transparent .95px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 38%, #000 76%, transparent);
+  mask-image: linear-gradient(90deg, transparent 38%, #000 76%, transparent);
+  opacity: .65;
+}
+
+.site .hero-wrap::after {
+  background:
+    radial-gradient(ellipse at 78% 51%, var(--ambient), transparent 48%),
+    radial-gradient(ellipse at 46% 100%, var(--soft), transparent 52%);
+  opacity: .7;
+}
+
+.site .hero {
+  position: relative;
+  z-index: 1;
+}
+
+.site .hero-art {
+  z-index: 1;
+}
+
+/* Small changes in geometry give each brand its own paper ground. */
+.arch .hero-wrap::before {
+  background-size: 19px 19px;
+  -webkit-mask-image: radial-gradient(ellipse at 77% 54%, #000 12%, transparent 67%);
+  mask-image: radial-gradient(ellipse at 77% 54%, #000 12%, transparent 67%);
+}
+
+.reverse .hero-wrap::before {
+  background-image: repeating-linear-gradient(135deg, transparent 0 30px, var(--paper-line) 30px 31px);
+  background-size: auto;
+  -webkit-mask-image: radial-gradient(ellipse at 23% 52%, #000 10%, transparent 65%);
+  mask-image: radial-gradient(ellipse at 23% 52%, #000 10%, transparent 65%);
+}
+
+.reverse .hero-wrap::after {
+  background: radial-gradient(ellipse at 24% 58%, var(--ambient), transparent 51%);
+}
+
+.bloom .hero-wrap::before {
+  background-size: 29px 29px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 75%, transparent);
+  mask-image: linear-gradient(180deg, transparent 28%, #000 75%, transparent);
+}
+
+.bloom .hero-wrap::after {
+  background: radial-gradient(ellipse at 50% 80%, var(--ambient), transparent 55%);
+}
+
+.flight .hero-wrap::before {
+  background-image: repeating-linear-gradient(165deg, transparent 0 54px, var(--paper-line) 54px 55px);
+  background-size: auto;
+}
+
+.steps .hero-wrap::before {
+  background-image:
+    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px),
+    linear-gradient(var(--paper-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse at 79% 62%, #000, transparent 60%);
+  mask-image: radial-gradient(ellipse at 79% 62%, #000, transparent 60%);
+}
+
+.bolt .hero-wrap::before {
+  background-image: repeating-linear-gradient(135deg, transparent 0 44px, var(--paper-line) 44px 45px);
+  background-size: auto;
+  opacity: .45;
+}
+
+.precision .hero-wrap::before {
+  opacity: 0;
+}
+
+.precision .hero {
+  background-image:
+    radial-gradient(ellipse at 80% 48%, var(--ambient), transparent 55%),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+}
+
+.companion .hero-wrap::before {
+  background-size: 27px 27px;
+  opacity: .4;
+}
+
+.bubble .hero-wrap::before {
+  background-image: radial-gradient(circle, transparent 4px, var(--paper-line) 4px 5px, transparent 5px);
+  background-size: 42px 42px;
+  -webkit-mask-image: radial-gradient(ellipse at 80% 52%, #000, transparent 63%);
+  mask-image: radial-gradient(ellipse at 80% 52%, #000, transparent 63%);
+}
+
+.runway .hero-wrap::before {
+  background-image: repeating-linear-gradient(90deg, transparent 0 55px, var(--paper-line) 55px 56px);
+  background-size: auto;
+}
+
+/* Delays end within 700 ms. Text starts visible, keeping the first view readable. */
+.site .hero-copy h1 {
+  animation: hero-copy-in 480ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.site .hero-copy > p {
+  animation: hero-copy-in 480ms 70ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.site .hero-copy .actions {
+  animation: hero-copy-in 480ms 140ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.site .hero-art {
+  animation: hero-art-in 600ms ease-out both;
+}
+
+/* Animate the image, preserving each composition's .hero-art layout transform. */
+.site .hero-art img {
+  animation: hero-art-float 2100ms 180ms ease-in-out 2;
+}
+
+@keyframes hero-copy-in {
+  from { opacity: .55; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-art-in {
+  from { opacity: .6; }
+  to { opacity: 1; }
+}
+
+@keyframes hero-art-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(-1 * var(--motion-distance))); }
+}
+
+/* Mouse and keyboard receive the same small directional feedback. */
+.site .button,
+.site .header-action {
+  transition: transform 180ms ease-out;
+}
+
+.site :is(.button, .header-action, .text-link, .guide-item) > svg,
+.site .device-strip a > svg {
+  transition: transform 180ms ease-out;
+}
+
+.site :is(.text-link, .site-header nav a, footer nav a) {
+  position: relative;
+}
+
+.site :is(.text-link, .site-header nav a, footer nav a)::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  background: currentColor;
+  opacity: .55;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 180ms ease-out;
+  pointer-events: none;
+}
+
+.site footer nav a::after {
+  bottom: -4px;
+}
+
+.site :is(.text-link, .site-header nav a, footer nav a):focus-visible::after {
+  transform: scaleX(1);
+}
+
+.site :is(.button, .header-action, .text-link, .guide-item):focus-visible > svg {
+  transform: translateX(3px);
+}
+
+.site details > summary span {
+  transition: transform 180ms ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site :is(.button, .header-action):hover { transform: translateY(-2px); }
+  .site :is(.button, .header-action):active { transform: translateY(0); }
+  .site :is(.button, .header-action, .text-link, .guide-item):hover > svg { transform: translateX(3px); }
+  .site .device-strip a:hover > svg { transform: translateY(-2px); }
+  .site :is(.text-link, .site-header nav a, footer nav a):hover::after { transform: scaleX(1); }
+}
+
+@media (max-width: 640px) {
+  .site { --motion-distance: 3px; }
+  .site .hero-wrap::before {
+    opacity: .35;
+    -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 77%, transparent);
+    mask-image: linear-gradient(180deg, transparent 28%, #000 77%, transparent);
+  }
+  .site .hero-wrap::after { opacity: .45; }
+  .precision .hero {
+    background-size: auto, 40px 40px, 40px 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site .hero-copy h1,
+  .site .hero-copy > p,
+  .site .hero-copy .actions,
+  .site .hero-art,
+  .site .hero-art img {
+    animation: none !important;
+  }
+  .site :is(.button, .header-action, .text-link, .guide-item),
+  .site :is(.button, .header-action, .text-link, .guide-item) > svg,
+  .site .device-strip a > svg,
+  .site :is(.text-link, .site-header nav a, footer nav a)::after,
+  .site details > summary span {
+    transition: none !important;
+  }
+  .site :is(.button, .header-action):hover,
+  .site :is(.button, .header-action, .text-link, .guide-item):is(:hover, :focus-visible) > svg,
+  .site .device-strip a:hover > svg {
+    transform: none;
+  }
+}

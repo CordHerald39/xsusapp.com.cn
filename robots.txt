@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xsusapp.com.cn/sitemap.xml
