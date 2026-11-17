@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../polish.css">
 <link rel="stylesheet" href="../motion.css">
+<link rel="stylesheet" href="../popup.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"XSUS订阅导入失败先查什么？核对配置再读日志","description":"订阅导入失败或连接异常时，先核对设备系统、客户端版本与订阅有效期，导入后检查列表和分流规则，再按报错时间点读日志并切换网络复测余下问题。","datePublished":"2026-11-09","dateModified":"2026-11-09","mainEntityOfPage":{"@type":"WebPage","@id":"https://xsusapp.com.cn/articles/xsus-guide.html"},"image":"https://xsusapp.com.cn/assets/xsus-hero.svg","inLanguage":"zh-CN"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"XSUS使用指南","item":"https://xsusapp.com.cn/"},{"@type":"ListItem","position":2,"name":"XSUS订阅导入失败先查什么？核对配置再读日志","item":"https://xsusapp.com.cn/articles/xsus-guide.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"订阅导入失败先查什么？","acceptedAnswer":{"@type":"Answer","text":"先查设备系统、客户端版本和订阅有效期是否与订阅内容一致。三项中任何一项不匹配，导入都可能被拒绝。确认一致后再看导入提示，不要直接换网络重试。"}},{"@type":"Question","name":"连接失败怎样读日志？","acceptedAnswer":{"@type":"Answer","text":"找到报错发生的时间点，查看该时间点前后几条日志条目，记录错误信息原文。报错在配置加载阶段就回查列表与选择；报错在连接发起之后，再切换网络复测并对比时间点变化。"}},{"@type":"Question","name":"切换网络后仍异常怎么办？","acceptedAnswer":{"@type":"Answer","text":"保持配置不变，回到列表确认当前选择与分流规则仍指向同一条配置。每次只改一个变量后复测，并记录结果。若报错特征一致，整理设备系统、客户端版本、报错时间点和错误信息原文，向订阅提供方或客户端支持渠道描述现象。"}}]}</script>
@@ -44,4 +45,6 @@
 <p class="article-disclosure">独立使用指南，非XSUS官方站。具体服务信息以品牌页面当时显示为准。</p>
 </main>
 <footer><div class="footer-main"><a class="brand" href="../index.html"><img src="../assets/logo.svg" width="34" height="34" alt=""><span>XSUS</span></a><nav aria-label="页脚导航"><a href="../index.html">回到首页</a><a href="../index.html#questions">常见问题</a></nav></div><div class="footer-base"><span>XSUS独立使用指南</span><span>内容日期 2026-11-09</span></div></footer>
-</body></html>
+<script src="../popup.js" defer></script>
+</body>
+</html>
